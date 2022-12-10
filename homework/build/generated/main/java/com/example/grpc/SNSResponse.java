@@ -50,7 +50,7 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            number_ = input.readInt32();
+            responseNumber_ = input.readInt32();
             break;
           }
           default: {
@@ -85,15 +85,15 @@ private static final long serialVersionUID = 0L;
             com.example.grpc.SNSResponse.class, com.example.grpc.SNSResponse.Builder.class);
   }
 
-  public static final int NUMBER_FIELD_NUMBER = 1;
-  private int number_;
+  public static final int RESPONSENUMBER_FIELD_NUMBER = 1;
+  private int responseNumber_;
   /**
-   * <code>int32 number = 1;</code>
-   * @return The number.
+   * <code>int32 responseNumber = 1;</code>
+   * @return The responseNumber.
    */
   @java.lang.Override
-  public int getNumber() {
-    return number_;
+  public int getResponseNumber() {
+    return responseNumber_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -110,8 +110,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (number_ != 0) {
-      output.writeInt32(1, number_);
+    if (responseNumber_ != 0) {
+      output.writeInt32(1, responseNumber_);
     }
     unknownFields.writeTo(output);
   }
@@ -122,9 +122,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (number_ != 0) {
+    if (responseNumber_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, number_);
+        .computeInt32Size(1, responseNumber_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -141,8 +141,8 @@ private static final long serialVersionUID = 0L;
     }
     com.example.grpc.SNSResponse other = (com.example.grpc.SNSResponse) obj;
 
-    if (getNumber()
-        != other.getNumber()) return false;
+    if (getResponseNumber()
+        != other.getResponseNumber()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -154,8 +154,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + NUMBER_FIELD_NUMBER;
-    hash = (53 * hash) + getNumber();
+    hash = (37 * hash) + RESPONSENUMBER_FIELD_NUMBER;
+    hash = (53 * hash) + getResponseNumber();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -289,7 +289,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      number_ = 0;
+      responseNumber_ = 0;
 
       return this;
     }
@@ -317,7 +317,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.example.grpc.SNSResponse buildPartial() {
       com.example.grpc.SNSResponse result = new com.example.grpc.SNSResponse(this);
-      result.number_ = number_;
+      result.responseNumber_ = responseNumber_;
       onBuilt();
       return result;
     }
@@ -366,8 +366,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.example.grpc.SNSResponse other) {
       if (other == com.example.grpc.SNSResponse.getDefaultInstance()) return this;
-      if (other.getNumber() != 0) {
-        setNumber(other.getNumber());
+      if (other.getResponseNumber() != 0) {
+        setResponseNumber(other.getResponseNumber());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -398,33 +398,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int number_ ;
+    private int responseNumber_ ;
     /**
-     * <code>int32 number = 1;</code>
-     * @return The number.
+     * <code>int32 responseNumber = 1;</code>
+     * @return The responseNumber.
      */
     @java.lang.Override
-    public int getNumber() {
-      return number_;
+    public int getResponseNumber() {
+      return responseNumber_;
     }
     /**
-     * <code>int32 number = 1;</code>
-     * @param value The number to set.
+     * <code>int32 responseNumber = 1;</code>
+     * @param value The responseNumber to set.
      * @return This builder for chaining.
      */
-    public Builder setNumber(int value) {
+    public Builder setResponseNumber(int value) {
       
-      number_ = value;
+      responseNumber_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 number = 1;</code>
+     * <code>int32 responseNumber = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNumber() {
+    public Builder clearResponseNumber() {
       
-      number_ = 0;
+      responseNumber_ = 0;
       onChanged();
       return this;
     }

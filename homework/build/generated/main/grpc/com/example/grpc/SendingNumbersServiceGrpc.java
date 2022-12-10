@@ -65,7 +65,7 @@ public final class SendingNumbersServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "receiveNumber",
       requestType = com.example.grpc.Empty.class,
       responseType = com.example.grpc.SNSResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.example.grpc.Empty,
       com.example.grpc.SNSResponse> getReceiveNumberMethod() {
     io.grpc.MethodDescriptor<com.example.grpc.Empty, com.example.grpc.SNSResponse> getReceiveNumberMethod;
@@ -74,7 +74,7 @@ public final class SendingNumbersServiceGrpc {
         if ((getReceiveNumberMethod = SendingNumbersServiceGrpc.getReceiveNumberMethod) == null) {
           SendingNumbersServiceGrpc.getReceiveNumberMethod = getReceiveNumberMethod =
               io.grpc.MethodDescriptor.<com.example.grpc.Empty, com.example.grpc.SNSResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "receiveNumber"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -162,7 +162,7 @@ public final class SendingNumbersServiceGrpc {
                   this, METHODID_SENDING_NUMBER)))
           .addMethod(
             getReceiveNumberMethod(),
-            asyncServerStreamingCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.example.grpc.Empty,
                 com.example.grpc.SNSResponse>(
@@ -197,7 +197,7 @@ public final class SendingNumbersServiceGrpc {
      */
     public void receiveNumber(com.example.grpc.Empty request,
         io.grpc.stub.StreamObserver<com.example.grpc.SNSResponse> responseObserver) {
-      asyncServerStreamingCall(
+      asyncUnaryCall(
           getChannel().newCall(getReceiveNumberMethod(), getCallOptions()), request, responseObserver);
     }
   }
@@ -225,9 +225,8 @@ public final class SendingNumbersServiceGrpc {
 
     /**
      */
-    public java.util.Iterator<com.example.grpc.SNSResponse> receiveNumber(
-        com.example.grpc.Empty request) {
-      return blockingServerStreamingCall(
+    public com.example.grpc.SNSResponse receiveNumber(com.example.grpc.Empty request) {
+      return blockingUnaryCall(
           getChannel(), getReceiveNumberMethod(), getCallOptions(), request);
     }
   }
@@ -252,6 +251,14 @@ public final class SendingNumbersServiceGrpc {
         com.example.grpc.SNSRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getSendingNumberMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.example.grpc.SNSResponse> receiveNumber(
+        com.example.grpc.Empty request) {
+      return futureUnaryCall(
+          getChannel().newCall(getReceiveNumberMethod(), getCallOptions()), request);
     }
   }
 

@@ -39,13 +39,14 @@ public final class SendingNumbersServiceOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\033SendingNumbersService.proto\022\020com.examp" +
-      "le.grpc\"\034\n\nSNSRequest\022\016\n\006number\030\001 \001(\005\"\035\n" +
-      "\013SNSResponse\022\016\n\006number\030\001 \001(\005\"\007\n\005Empty2\252\001" +
-      "\n\025SendingNumbersService\022F\n\rsendingNumber" +
-      "\022\034.com.example.grpc.SNSRequest\032\027.com.exa" +
-      "mple.grpc.Empty\022I\n\rreceiveNumber\022\027.com.e" +
-      "xample.grpc.Empty\032\035.com.example.grpc.SNS" +
-      "Response0\001B\002P\001b\006proto3"
+      "le.grpc\"3\n\nSNSRequest\022\022\n\nfirstValue\030\001 \001(" +
+      "\005\022\021\n\tlastValue\030\002 \001(\005\"%\n\013SNSResponse\022\026\n\016r" +
+      "esponseNumber\030\001 \001(\005\"\007\n\005Empty2\250\001\n\025Sending" +
+      "NumbersService\022F\n\rsendingNumber\022\034.com.ex" +
+      "ample.grpc.SNSRequest\032\027.com.example.grpc" +
+      ".Empty\022G\n\rreceiveNumber\022\027.com.example.gr" +
+      "pc.Empty\032\035.com.example.grpc.SNSResponseB" +
+      "\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -56,13 +57,13 @@ public final class SendingNumbersServiceOuterClass {
     internal_static_com_example_grpc_SNSRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_example_grpc_SNSRequest_descriptor,
-        new java.lang.String[] { "Number", });
+        new java.lang.String[] { "FirstValue", "LastValue", });
     internal_static_com_example_grpc_SNSResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_example_grpc_SNSResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_example_grpc_SNSResponse_descriptor,
-        new java.lang.String[] { "Number", });
+        new java.lang.String[] { "ResponseNumber", });
     internal_static_com_example_grpc_Empty_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_example_grpc_Empty_fieldAccessorTable = new

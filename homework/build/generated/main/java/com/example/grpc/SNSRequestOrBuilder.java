@@ -8,8 +8,14 @@ public interface SNSRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 number = 1;</code>
-   * @return The number.
+   * <code>int32 firstValue = 1;</code>
+   * @return The firstValue.
    */
-  int getNumber();
+  int getFirstValue();
+
+  /**
+   * <code>int32 lastValue = 2;</code>
+   * @return The lastValue.
+   */
+  int getLastValue();
 }

@@ -50,7 +50,12 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            number_ = input.readInt32();
+            firstValue_ = input.readInt32();
+            break;
+          }
+          case 16: {
+
+            lastValue_ = input.readInt32();
             break;
           }
           default: {
@@ -85,15 +90,26 @@ private static final long serialVersionUID = 0L;
             com.example.grpc.SNSRequest.class, com.example.grpc.SNSRequest.Builder.class);
   }
 
-  public static final int NUMBER_FIELD_NUMBER = 1;
-  private int number_;
+  public static final int FIRSTVALUE_FIELD_NUMBER = 1;
+  private int firstValue_;
   /**
-   * <code>int32 number = 1;</code>
-   * @return The number.
+   * <code>int32 firstValue = 1;</code>
+   * @return The firstValue.
    */
   @java.lang.Override
-  public int getNumber() {
-    return number_;
+  public int getFirstValue() {
+    return firstValue_;
+  }
+
+  public static final int LASTVALUE_FIELD_NUMBER = 2;
+  private int lastValue_;
+  /**
+   * <code>int32 lastValue = 2;</code>
+   * @return The lastValue.
+   */
+  @java.lang.Override
+  public int getLastValue() {
+    return lastValue_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -110,8 +126,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (number_ != 0) {
-      output.writeInt32(1, number_);
+    if (firstValue_ != 0) {
+      output.writeInt32(1, firstValue_);
+    }
+    if (lastValue_ != 0) {
+      output.writeInt32(2, lastValue_);
     }
     unknownFields.writeTo(output);
   }
@@ -122,9 +141,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (number_ != 0) {
+    if (firstValue_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, number_);
+        .computeInt32Size(1, firstValue_);
+    }
+    if (lastValue_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, lastValue_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -141,8 +164,10 @@ private static final long serialVersionUID = 0L;
     }
     com.example.grpc.SNSRequest other = (com.example.grpc.SNSRequest) obj;
 
-    if (getNumber()
-        != other.getNumber()) return false;
+    if (getFirstValue()
+        != other.getFirstValue()) return false;
+    if (getLastValue()
+        != other.getLastValue()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -154,8 +179,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + NUMBER_FIELD_NUMBER;
-    hash = (53 * hash) + getNumber();
+    hash = (37 * hash) + FIRSTVALUE_FIELD_NUMBER;
+    hash = (53 * hash) + getFirstValue();
+    hash = (37 * hash) + LASTVALUE_FIELD_NUMBER;
+    hash = (53 * hash) + getLastValue();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -289,7 +316,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      number_ = 0;
+      firstValue_ = 0;
+
+      lastValue_ = 0;
 
       return this;
     }
@@ -317,7 +346,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.example.grpc.SNSRequest buildPartial() {
       com.example.grpc.SNSRequest result = new com.example.grpc.SNSRequest(this);
-      result.number_ = number_;
+      result.firstValue_ = firstValue_;
+      result.lastValue_ = lastValue_;
       onBuilt();
       return result;
     }
@@ -366,8 +396,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.example.grpc.SNSRequest other) {
       if (other == com.example.grpc.SNSRequest.getDefaultInstance()) return this;
-      if (other.getNumber() != 0) {
-        setNumber(other.getNumber());
+      if (other.getFirstValue() != 0) {
+        setFirstValue(other.getFirstValue());
+      }
+      if (other.getLastValue() != 0) {
+        setLastValue(other.getLastValue());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -398,33 +431,64 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int number_ ;
+    private int firstValue_ ;
     /**
-     * <code>int32 number = 1;</code>
-     * @return The number.
+     * <code>int32 firstValue = 1;</code>
+     * @return The firstValue.
      */
     @java.lang.Override
-    public int getNumber() {
-      return number_;
+    public int getFirstValue() {
+      return firstValue_;
     }
     /**
-     * <code>int32 number = 1;</code>
-     * @param value The number to set.
+     * <code>int32 firstValue = 1;</code>
+     * @param value The firstValue to set.
      * @return This builder for chaining.
      */
-    public Builder setNumber(int value) {
+    public Builder setFirstValue(int value) {
       
-      number_ = value;
+      firstValue_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 number = 1;</code>
+     * <code>int32 firstValue = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNumber() {
+    public Builder clearFirstValue() {
       
-      number_ = 0;
+      firstValue_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int lastValue_ ;
+    /**
+     * <code>int32 lastValue = 2;</code>
+     * @return The lastValue.
+     */
+    @java.lang.Override
+    public int getLastValue() {
+      return lastValue_;
+    }
+    /**
+     * <code>int32 lastValue = 2;</code>
+     * @param value The lastValue to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLastValue(int value) {
+      
+      lastValue_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 lastValue = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearLastValue() {
+      
+      lastValue_ = 0;
       onChanged();
       return this;
     }

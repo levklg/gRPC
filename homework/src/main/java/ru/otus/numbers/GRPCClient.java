@@ -11,62 +11,74 @@ import io.grpc.stub.StreamObserver;
 import ru.otus.numbers.service.NumberGeneration;
 import ru.otus.numbers.service.NumberGenerationImpl;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.Deque;
+import java.util.Queue;
+import java.util.concurrent.*;
 
 public class GRPCClient {
 
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 8190;
 
-    public static void main(String[] args) throws InterruptedException {
+    private static ExecutorService service = Executors.newFixedThreadPool(2);
+    private static ConcurrentLinkedDeque deque = new ConcurrentLinkedDeque<Integer>();
+    private static boolean recive = false;
 
-        NumberGeneration numberGeneration = new NumberGenerationImpl();
+    public static void main(String[] args) throws InterruptedException {
 
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext()
                 .build();
 
-        var stub = SendingNumbersServiceGrpc.newStub(channel);
+        var stubBlock = SendingNumbersServiceGrpc.newBlockingStub(channel);
 
-        Empty empty = null;
         SNSRequest request = SNSRequest.newBuilder()
-                .setNumber(numberGeneration.generation(0, 50))
+                .setFirstValue(0)
+                .setLastValue(30)
                 .build();
-       // var stub1 = SendingNumbersServiceGrpc.(channel);
 
-
-
-
-
-
-
-        var latch = new CountDownLatch(1);
-        while (true) {
-            stub.receiveNumber(  empty, new StreamObserver<SNSResponse>() {
-                public void onNext(SNSResponse response) {
-
-
-                    System.out.println("Client получил " + response);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                public void onError(Throwable t) {
-                    System.err.println(t);
-                }
-
-                public void onCompleted() {
-
-                    System.out.println("\n\nЯ все!");
-                    latch.countDown();
-                }
-            });
-            latch.await();
-            channel.shutdown();
-        }
+        stubBlock.sendingNumber(request);
+        service.submit(() -> reciveNumberFromServer(channel));
+        service.submit(() -> showCurrentValue());
 
     }
+
+    public static void reciveNumberFromServer(ManagedChannel channel) {
+        var stubBlock = SendingNumbersServiceGrpc.newBlockingStub(channel);
+        SNSResponse response = null;
+
+        while (true) {
+            response = stubBlock.receiveNumber(null);
+            if (response.getResponseNumber() == 999) {
+                System.out.println("request completed");
+                break;
+            }
+            deque.add(response.getResponseNumber());
+            recive = true;
+            System.out.println("число от сервера: " + response.getResponseNumber());
+
+        }
+    }
+
+    public static void showCurrentValue() {
+        int i = 0;
+        int currentValue = 0;
+        while (i < 50) {
+
+            if (recive) {
+                currentValue = currentValue + Integer.parseInt(deque.getLast().toString()) + 1;
+                recive = false;
+            } else {
+                currentValue++;
+            }
+            System.out.println("currentValue: " + currentValue);
+            i++;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

@@ -8,8 +8,8 @@ public interface SNSResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 number = 1;</code>
-   * @return The number.
+   * <code>int32 responseNumber = 1;</code>
+   * @return The responseNumber.
    */
-  int getNumber();
+  int getResponseNumber();
 }
