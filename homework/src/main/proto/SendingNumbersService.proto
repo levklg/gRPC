@@ -1,0 +1,22 @@
+syntax = "proto3";
+package com.example.grpc;
+option java_multiple_files = true;
+
+
+message SNSRequest {
+   int32 firstValue = 1 ;
+   int32 lastValue = 2;
+}
+
+message SNSResponse {
+   int32  responseNumber  = 1;
+}
+
+message Empty {}
+
+service SendingNumbersService {
+
+  rpc sendingNumber(SNSRequest) returns (Empty);
+  rpc receiveNumber(Empty)  returns (SNSResponse);
+
+}
