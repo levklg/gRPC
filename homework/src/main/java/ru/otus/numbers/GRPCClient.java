@@ -14,15 +14,16 @@ import ru.otus.numbers.service.NumberGenerationImpl;
 import java.util.Deque;
 import java.util.Queue;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GRPCClient {
 
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 8190;
 
+    private static AtomicInteger reciveVariable = new AtomicInteger(0);
+    private static int lastVariable = 0;
 
-    private static int lastVariable  = 0;
-    private static boolean recive = false;
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -38,8 +39,8 @@ public class GRPCClient {
                 .build();
 
         stubBlock.sendingNumber(request);
-        new Thread(() -> reciveNumberFromServer(channel)).start() ;
-         showCurrentValue();
+        new Thread(() -> reciveNumberFromServer(channel)).start();
+        showCurrentValue();
 
     }
 
@@ -54,8 +55,8 @@ public class GRPCClient {
                 System.out.println("request completed");
                 break;
             }
-            lastVariable = response.getResponseNumber();
-            System.out.println("число от сервера: " + response.getResponseNumber());
+            lastVariable = reciveVariable.getAndSet(response.getResponseNumber());
+            System.out.println("число от сервера: " + lastVariable);
 
         }
     }
@@ -74,6 +75,7 @@ public class GRPCClient {
             } else {
                 currentValue++;
             }
+
             System.out.println("currentValue: " + currentValue);
             i++;
             try {

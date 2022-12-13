@@ -29,8 +29,7 @@ public class SendingNumbersServiceImpl extends SendingNumbersServiceGrpc.Sending
 
         if (numberGeneration.getFirstValue() < numberGeneration.getLastValue()) {
             numberGeneration.generation();
-
-        } else {
+        }else {
             numberGeneration.setFirstValue(999);
         }
 
