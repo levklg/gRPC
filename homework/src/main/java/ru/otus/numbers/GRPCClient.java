@@ -20,8 +20,8 @@ public class GRPCClient {
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 8190;
 
-    private static ExecutorService service = Executors.newFixedThreadPool(2);
-    private static ConcurrentLinkedDeque deque = new ConcurrentLinkedDeque<Integer>();
+
+    private static int lastVariable  = 0;
     private static boolean recive = false;
 
     public static void main(String[] args) throws InterruptedException {
@@ -38,8 +38,8 @@ public class GRPCClient {
                 .build();
 
         stubBlock.sendingNumber(request);
-        service.submit(() -> reciveNumberFromServer(channel));
-        service.submit(() -> showCurrentValue());
+        new Thread(() -> reciveNumberFromServer(channel)).start() ;
+         showCurrentValue();
 
     }
 
@@ -48,13 +48,13 @@ public class GRPCClient {
         SNSResponse response = null;
 
         while (true) {
+
             response = stubBlock.receiveNumber(null);
             if (response.getResponseNumber() == 999) {
                 System.out.println("request completed");
                 break;
             }
-            deque.add(response.getResponseNumber());
-            recive = true;
+            lastVariable = response.getResponseNumber();
             System.out.println("число от сервера: " + response.getResponseNumber());
 
         }
@@ -63,11 +63,14 @@ public class GRPCClient {
     public static void showCurrentValue() {
         int i = 0;
         int currentValue = 0;
+        int m_lastVariable = 0;
+
         while (i < 50) {
 
-            if (recive) {
-                currentValue = currentValue + Integer.parseInt(deque.getLast().toString()) + 1;
-                recive = false;
+            if (m_lastVariable != lastVariable) {
+                currentValue = currentValue + lastVariable + 1;
+                m_lastVariable = lastVariable;
+
             } else {
                 currentValue++;
             }
